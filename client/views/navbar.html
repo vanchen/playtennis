@@ -1,0 +1,19 @@
+<template name="navbar">
+  <div class="navbar navbar-custom navbar-fixed-top">
+   <div class="navbar-header"><a class="navbar-brand" href="#">Play Tennis Victoria</a>
+     <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+       <span class="icon-bar"></span>
+       <span class="icon-bar"></span>
+       <span class="icon-bar"></span>
+     </a>
+   </div>
+    <div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="{{urlFor route='host'}}"><span class="glyphicon glyphicon-plus"></span> </a></li>
+      <li class="active"><a href="{{urlFor route='join'}}"> <span class="glyphicon glyphicon-ok"></span></a> </li>
+      <li class="active"><a href="#"> <span class="glyphicon glyphicon-user"></span></a> </li>
+      <li>&nbsp;</li>
+    </ul>
+    </div>
+  </div>
+</template>
