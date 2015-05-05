@@ -1,4 +1,8 @@
-#Websites and Apps for design inspiration
+INCLUDES
+Goolge Maps API
+Bootbox - http://bootboxjs.com/#
+Bootstrap 3 Clock Picker - http://weareoutman.github.io/clockpicker/
+
 
 FUNCTIONALITY
 
@@ -12,7 +16,7 @@ http://meteorcapture.com/ - I like the landing page.
 
 https://crater.io/ - Good design for the 'join' page
 
-http://fortawesome.github.io/ - Icons. 
+http://fortawesome.github.io/ - Icons.
 
 http://colourco.de/ - Create a design pallete.
 
@@ -25,7 +29,3 @@ http://mappable.info/ - Further customization possibe?
 MISC
 
 http://www.re.co/#/
-
-
-
-

@@ -1,0 +1,64 @@
+
+.dropdown-menu {
+  width: 100%;
+}
+
+.label {
+  color: #3b1814;
+}
+
+.btn{
+ width: 100%;
+ font-family: 'Raleway', sans-serif;
+ font-size: 15px;
+ background-color: #3b1814;
+}
+
+.btn:hover{
+ background-color: #3b1814;
+}
+.glyphicon-play-circle{
+  font-size:25px;
+}
+
+.details {
+  font-size:10px;
+  margin-top: 20px;
+  margin-left: 12px;
+  color: #3b1814;
+}
+
+.title {
+  font-size:20px;
+}
+
+.main {
+  background: #fff;
+  border-radius: 3px;
+  padding: 10px;
+  margin-bottom: 10px;
+  margin-top:20px;
+  box-shadow: 0 1px 1px #3b1814;
+  font-family: 'Raleway', sans-serif;
+
+
+}
+
+html,body{
+  	height:100%;
+}
+
+body{
+  	padding-top:0px; /*padding for navbar*/
+}
+
+
+.map-container-host{
+  	width:100%;
+      height:calc(100% - 0);
+      position:absolute;
+      right:0px;
+      top:0px;
+      bottom:0;
+      overflow:hidden;
+}

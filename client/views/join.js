@@ -49,17 +49,7 @@ var styles = [
 
 // Helper functions
 //
-
-Template.join.helpers( {
-  exampleMapOptions: function(){
-    if (GoogleMaps.loaded()) {
-      return {
-        center: new google.maps.LatLng(48.4222,-123.3657),
-        zoom: 12,
-        disableDefaultUI: true,
-        styles: styles};
-    }
-  },
+Template.join.helers({
   posts: function() {
     return Posts.find();
   },

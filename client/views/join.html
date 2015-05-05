@@ -1,39 +1,23 @@
 <template name="join">
-
-  {{>navbar}}
-
-  <div class="container-fluid" id="main">
-    <div class="row">
-      <h3 class="main"> <strong> Join a match. </strong> </h3>
-      <div class="col-xs-8" id="left">
-
+  <div id="wrapper">
+    {{>navbar}}
+    <div id="page-content-wrapper">
+      <div class="container-fluid">
+        <div class="row">
         {{#each posts}}
-
-        <div class="main row h" id="{{_id}}">
-          <div class="col-xs-5">
-
-             {{title}}
-
-          </div>
-          <div class="col-xs-2 details">
-            <span class="glyphicon glyphicon-tag"></span> 4.5 singles
-          </div>
-          <div class="col-xs-3 details">
-            <span class="glyphicon glyphicon-globe"> </span> Craigflower Road Courts
-          </div>
-          <div class="col-xs-2 details">
-            <span class="glyphicon glyphicon-time"></span>  3:00 pm
-          </div>
+          <div class="main row h" id="{{_id}}">
+            <div class="col-xs-12 title">
+              {{title}}
+           </div>
+           <p>
+              <span class=" details glyphicon glyphicon-tag"></span> {{type}}
+              <span class=" details glyphicon glyphicon-globe"> </span> {{court}}
+              <span class="details glyphicon glyphicon-time"></span>  {{time}}
+           </p>
         </div>
-
         {{/each}}
-
       </div>
     </div>
   </div>
-
-  <div class="map-container">
-    {{> googleMap name="exampleMap" options=exampleMapOptions}}
   </div>
-
 </template>
