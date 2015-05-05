@@ -2,15 +2,18 @@
 <div id="sidebar-wrapper">
   <ul class="sidebar-nav">
     <li class="sidebar-brand">
-      <a href="#">
+      <a href="{{urlFor route='join'}}">
         <span class="glyphicon glyphicon-home"></span>
       </a>
     </li>
     <li>
-      <a href="{{urlFor route='host'}}"> Host </a>
+      <a href="{{urlFor route='host'}}"> <i class="nav-icon glyphicon glyphicon-time"> </i> </a>
     </li>
     <li>
-      <a href="{{urlFor route='join'}}">Join</a>
+      <a href="{{urlFor route='join'}}"> <i class="nav-icon glyphicon glyphicon-globe"> </i></a>
+    </li>
+    <li>
+      <a href="{{urlFor route='join'}}"> <i class="nav-icon glyphicon glyphicon-thumbs-up"> </i></a>
     </li>
   </ul>
 </div>

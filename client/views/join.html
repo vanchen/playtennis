@@ -3,13 +3,22 @@
     {{>navbar}}
     <div id="page-content-wrapper">
       <div class="container-fluid">
+        <h1 class="join-title"> play tennis victoria </h1>
+        <span class="join-header glyphicon glyphicon-user"></span>
+        <span class="join-header glyphicon glyphicon-th-list"></span>
+        <span class="join-header glyphicon glyphicon-search"></span>
+        <a href="{{urlFor route='host'}}"><span class="join-header glyphicon glyphicon-plus"> </span></a>
+        <hr class="divider">
         <div class="row">
         {{#each posts}}
           <div class="main row h" id="{{_id}}">
-            <div class="col-xs-12 title">
+            <div class="col-xs-1">
+              <a class="btn btn-default box"> <span class="j glyphicon glyphicon-ok"></span></a>
+            </div>
+            <div class="col-xs-11 title">
               {{title}}
            </div>
-           <p>
+           <p class="content-info">
               <span class=" details glyphicon glyphicon-tag"></span> {{type}}
               <span class=" details glyphicon glyphicon-globe"> </span> {{court}}
               <span class="details glyphicon glyphicon-time"></span>  {{time}}

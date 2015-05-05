@@ -49,7 +49,7 @@ var styles = [
 
 // Helper functions
 //
-Template.join.helers({
+Template.join.helpers({
   posts: function() {
     return Posts.find();
   },

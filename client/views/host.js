@@ -14,7 +14,7 @@ Template.add.helpers( {
 Template.add.onCreated(function() {
   GoogleMaps.ready('exampleMap',function(map){
       markers = [];
-      bootbox.alert("Choose a court to host your match.");
+      //bootbox.alert("Choose a court to host your match.");
       Courts.find().forEach(function(court) {
       LatLng = new google.maps.LatLng(court.Lat,court.Lng);
       var image = '/img/tennis.png';
@@ -65,7 +65,7 @@ Template.add.onCreated(function() {
         });
 
       // Add jquery to info windom DOM
-        
+
       google.maps.event.addListener(info,'domready',function() {
           $('.clockpicker').clockpicker();
           $('#court').attr('placeholder',court.Name)
