@@ -1,13 +1,53 @@
 <template name="join">
+  {{#if currentUser}}
   <div id="wrapper">
     {{>navbar}}
     <div id="page-content-wrapper">
       <div class="container-fluid">
+        <div class="row">
         <h1 class="join-title"> play tennis victoria </h1>
-        <span class="join-header glyphicon glyphicon-user"></span>
-        <span class="join-header glyphicon glyphicon-th-list"></span>
-        <span class="join-header glyphicon glyphicon-search"></span>
-        <a href="{{urlFor route='host'}}"><span class="join-header glyphicon glyphicon-plus"> </span></a>
+
+        <div class="dropdown join-header">
+          <button class="btn btn-default dropdown-toggle btn-join" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+            <span class=" glyphicon glyphicon-user"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Profile</a></li>
+            <li role="presentation"><a role="menuitem" class = "logout" tabindex="-1" href="#">Logout</a></li>
+          </ul>
+        </div>
+
+        <div class="dropdown join-header">
+          <button class="btn btn-default dropdown-toggle btn-join" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+            <span class="glyphicon glyphicon-th-list"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+
+          </ul>
+        </div>
+
+        <div class="dropdown join-header">
+          <button class="btn btn-default dropdown-toggle btn-join" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+
+          </ul>
+        </div>
+
+        <div class="dropdown join-header">
+          <button class="btn btn-default dropdown-toggle btn-join" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+            <a href="{{urlFor route='host'}}"><span class="glyphicon glyphicon-plus"> </span></a>
+          </button>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+          </ul>
+        </div>
+
+
+      </div>
         <hr class="divider">
         <div class="row">
         {{#each posts}}
@@ -29,4 +69,7 @@
     </div>
   </div>
   </div>
+  {{else}}
+    {{>landing}}
+  {{/if}}
 </template>

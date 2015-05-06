@@ -11,9 +11,13 @@ Router.route('court/:Name', function() {
 
 
 Router.route("/", function(){
-  this.render('join');
-}, {name : 'join'});
+  this.render('landing');
+}, {name : 'landing'});
 
 Router.route('host', function () {
   this.render('add');
 }, {name: 'host'});
+
+Router.route("join", function(){
+  this.render('join');
+}, {name : 'join'});

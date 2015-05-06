@@ -2,6 +2,7 @@ INCLUDES
 Goolge Maps API
 Bootbox - http://bootboxjs.com/#
 Bootstrap 3 Clock Picker - http://weareoutman.github.io/clockpicker/
+Kickbox Email Verification - https://kickbox.io/app/#/ (Beautiful login and signup form)
 
 
 FUNCTIONALITY
@@ -9,6 +10,8 @@ FUNCTIONALITY
 http://www.tennisround.com - Based in the United States.. many of the user features (logging matches, ect) are similar to what I would like to implement.
 
 tennisbuddy.com - Android and iPhone application connecting tennis players.
+
+http://themeteorchef.com/recipes/roll-your-own-authentication/ - Authentication tutorial for email verifcation.
 
 DESIGN
 
