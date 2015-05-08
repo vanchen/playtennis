@@ -1,7 +1,8 @@
 .test {
-  margin-left: 100px;
-}
-
+    width: 14%;
+    margin-left:1315px;
+    margin-top: 5px;
+  }
 /* Landing Page Styles */
 
 .header {
@@ -141,9 +142,6 @@ body{
 #wrapper-map {
   position:relative;
 }
-#menu {
-  float:right;
-}
 
 .map-container-host{
   	width:100%;
@@ -153,4 +151,5 @@ body{
       top:0px;
       bottom:0;
       overflow:hidden;
+
 }

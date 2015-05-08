@@ -1,3 +1,21 @@
+// EventsS
+
+Template.add.events({
+  'click .gps' : function(event) {
+    var pos = Geolocation.latLng();
+    var google_pos = new google.maps.LatLng(pos.lat,pos.lng);
+
+    var marker = new google.maps.Marker({
+        position: google_pos,
+        map: maps[0].instance,
+        icon: '/img/blue_dot.png',
+      });
+      maps[0].instance.setCenter(google_pos);
+
+  }
+});
+
+
 // Helper Functions
 
 Template.add.helpers( {
@@ -56,7 +74,7 @@ Template.add.helpers( {
       });
     }
       return {
-        center: new google.maps.LatLng(48.4222,-123.3657),
+        center: new google.maps.LatLng(Geolocation.latLng().lat,Geolocation.latLng().lng),
         zoom: 12,
         disableDefaultUI: true};
     }
@@ -66,6 +84,7 @@ Template.add.helpers( {
 Template.add.onCreated(function() {
   GoogleMaps.ready('exampleMap',function(map){
       markers = [];
+      maps = [map];
       //bootbox.alert("Choose a court to host your match.");
       Courts.find().forEach(function(court) {
       LatLng = new google.maps.LatLng(court.Lat,court.Lng);
