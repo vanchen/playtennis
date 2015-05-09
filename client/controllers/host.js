@@ -1,4 +1,55 @@
-// EventsS
+if (Meteor.isClient) {
+  Session.setDefault('username', 'Username');
+  Session.setDefault('firstname', 'First Name');
+  Session.setDefault('lastname', 'Last Name');
+}
+
+// Editable Profile Helpers
+
+Template.add.rendered = function(){
+  $.fn.editable.defaults.mode = 'inline';
+  $('#textUser.editable').editable({
+    placement: "auto top",
+      success: function(response, newValue) {
+        console.log('set new value to ' + newValue);
+        Session.set('username', newValue);
+    }});
+  $('#textLast.editable').editable({
+    placement: "auto top",
+        success: function(response, newValue) {
+          console.log('set new value to ' + newValue);
+          Session.set('lastname', newValue);
+        }});
+  $('#textFirst.editable').editable({
+    placement: "auto top",
+      success: function(response, newValue) {
+        console.log('set new value to ' + newValue);
+        Session.set('firstname', newValue);
+      }});
+
+  $('#gender.editable').editable({
+    value:1,
+    source: [
+      {value:1, text: 'Male'},
+      {value:2,text:'Female'}
+    ]
+  });
+
+  $('#skill.editable').editable({
+    value:1,
+    source: [
+      {value:1, text: '2.0'},
+      {value:2,text:'2.5'},
+      {value:3,text:'3.0'},
+      {value:4,text:'3.5'},
+      {value:5,text:'4.0'},
+      {value:6,text:'4.5'}
+    ]
+  });
+}
+
+
+// Events
 
 Template.add.events({
   'click .gps' : function(event) {
@@ -11,73 +62,38 @@ Template.add.events({
         icon: '/img/blue_dot.png',
       });
       maps[0].instance.setCenter(google_pos);
-
-  }
+  },
+  'click .map-list' : function(event) {
+    if ($('#sidebar-extension').css('width') === '0px') {
+      $('#sidebar-extension').css('width','400px');
+      $('#profile-interface').css('visibility','visible');
+    }
+    else {
+      $('#sidebar-extension').css('width','0px')
+      $('#profile-interface').css('visibility','hidden');
+    }
+  },
 });
-
 
 // Helper Functions
 
 Template.add.helpers( {
   exampleMapOptions: function(){
     if (GoogleMaps.loaded()) {
-      if (Meteor.user().profile.Gender  == null ) {
-        bootbox.dialog({
-        title: "Thank you for registering! Please fill out the following to complete your profile.",
-        message: '<form>'+
-                  '<div class="form-group">'+
-                  '<label for="profile-username"> *Username: </label>'+
-                 '<input class ="form-control" type="email" required="true" id="profile-username">' +
-                 '</div>'+
-                 '<div class="form-group">'+
-                 '<label for="profile-first"> *First Name </label>'+
-                '<input class ="form-control" type="email" id="profile-first">' +
-                '</div>'+
-                 '<div class="form-group inline">'+
-                 '<label for="profile-last"> *Last Name: </label>'+
-                '<input class ="form-control" type="password" id="profile-last">' +
-                '</div>'+
-                '<div class="form-group">'+
-                '<label> Skill Guidelines: </label><br/>'+
-                '<select class="form-control" id="profile-gender" placeholder="Choose gender">'+
-                '<option value="" selected disabled>Please select gender</option>'+
-                '<option>Male</option>'+
-                '<option>Female</option>'+
-                '</select>'+
-                '<select class="form-control" id="profile-skill" placeholder="Choose skill rating">'+
-                '<option value="" selected disabled>Please select skill level</option>'+
-                '<option>2.0</option>'+
-                '<option>2.5</option>'+
-                '<option>3.0</option>'+
-                '<option>3.5</option>'+
-                '<option>4.0</option>'+
-                '<option>4.5</option>'+
-                '</select>'+
-                '</div>'+
-                '</form>',
-        buttons: {
-          success: {
-            label: "Submit",
-            className: "btn-success",
-            callback: function() {
-              profile = {
-                'First Name' : $('#profile-first').val(),
-                'Last Name' : $('#profile-last').val(),
-                'Gender' : $('#profile-gender').val(),
-                'Skill' : $('#profile-skill').val()
-              }
-
-              Meteor.users.update(Meteor.userId(),{$set:{'profile':profile}});
-            }
-          }
-        }
-      });
-    }
       return {
         center: new google.maps.LatLng(Geolocation.latLng().lat,Geolocation.latLng().lng),
         zoom: 12,
         disableDefaultUI: true};
     }
+  },
+  'username': function () {
+    return Session.get('username');
+  },
+  'firstname' : function() {
+    return Session.get('firstname');
+  },
+  'lastname' : function() {
+    return Session.get('lastname');
   }
 });
 
@@ -150,7 +166,6 @@ Template.add.onCreated(function() {
               time: $(event.target).find('[id=time]').val()
             }
             Posts.insert(postProperties);
-            Router.go('join');
           });
         });
 

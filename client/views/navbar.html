@@ -1,4 +1,6 @@
 <template name="navbar">
+<!-- Main Sidebar Menu -->
+
 <div id="sidebar-wrapper">
   <ul class="sidebar-nav">
     <li class="sidebar-brand">
@@ -6,9 +8,37 @@
         <span class="glyphicon glyphicon-home"></span>
       </a>
     </li>
-    <li>
-      <a href="{{urlFor route='join'}}"> <i class="nav-icon glyphicon glyphicon-th-list"> </i> </a>
+    <li class="map-list">
+      <a href="#"> <i class="nav-icon glyphicon glyphicon-user"> </i> </a>
+    </li>
+    <li class="map-list">
+      <a href="#"> <i class="nav-icon glyphicon glyphicon-th-list"> </i> </a>
     </li>
   </ul>
+</div>
+
+<!-- Extended Sidebar Menu -->
+
+<div id= "sidebar-extension">
+  <form id="profile-interface">
+    <h3> User Profile </h3>
+    <div class="form-group">
+      <label for="profile-username"> Username: </label>
+      <p id="textUser" class="editable form-control landing-form" data-type="text" data-placeholder="Enter username" data-emptytext="" data-rows="2">{{username}}</p>
+    </div>
+    <div class="form-group">
+      <label for="profile-first"> First Name </label>
+      <p id="textFirst" class="editable form-control landing-form" data-type="text" data-placeholder="Enter username" data-emptytext="" data-rows="2">{{firstname}}</p>
+    </div>
+    <div class="form-group">
+      <label for="profile-last"> Last Name: </label>
+      <p id="textLast" class="editable form-control landing-form" data-type="text" data-placeholder="Enter username" data-emptytext="" data-rows="2">{{lastname}}</p>
+    </div>
+    <div class="form-group">
+      <label> Skill Guidelines: </label><br/>
+      <p id="gender" class="editable form-control landing-form" data-type="select" data-placeholder="Enter username" data-emptytext="" data-rows="2">{{textAreaContent}}</p>
+      <p id="skill" class="editable form-control landing-form" data-type="select" data-placeholder="Enter username" data-emptytext="" data-rows="2">{{textAreaContent}}</p>
+    </div>
+  </form>
 </div>
 </template>

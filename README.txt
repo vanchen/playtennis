@@ -4,6 +4,7 @@ Bootbox - http://bootboxjs.com/#
 Bootstrap 3 Clock Picker - http://weareoutman.github.io/clockpicker/
 Kickbox Email Verification - https://kickbox.io/app/#/ (Beautiful login and signup form)
 MailGun https://mailgun.com/app/dashboard (For sending emails from Meteor.)
+X-editable
 
 FUNCTIONALITY
 
@@ -32,3 +33,5 @@ http://mappable.info/ - Further customization possibe?
 MISC
 
 http://www.re.co/#/
+
+vanpubtennis.com/courts/ - Information on all the public tennis courts in Vancouver!

@@ -5,7 +5,7 @@ Template.landing.events({
   'click .register': function() {
     Session.set('createOrSignIn','create')
   },
-  'submit form' : function(event) {
+  'submit form-landing' : function(event) {
     event.preventDefault()
     var createOrSignIn = Session.get('createOrSignIn')
     user = {
