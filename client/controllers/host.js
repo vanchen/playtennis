@@ -1,53 +1,3 @@
-if (Meteor.isClient) {
-  Session.setDefault('username', 'Username');
-  Session.setDefault('firstname', 'First Name');
-  Session.setDefault('lastname', 'Last Name');
-}
-
-// Editable Profile Helpers
-
-Template.add.rendered = function(){
-  $.fn.editable.defaults.mode = 'inline';
-  $('#textUser.editable').editable({
-    placement: "auto top",
-      success: function(response, newValue) {
-        console.log('set new value to ' + newValue);
-        Session.set('username', newValue);
-    }});
-  $('#textLast.editable').editable({
-    placement: "auto top",
-        success: function(response, newValue) {
-          console.log('set new value to ' + newValue);
-          Session.set('lastname', newValue);
-        }});
-  $('#textFirst.editable').editable({
-    placement: "auto top",
-      success: function(response, newValue) {
-        console.log('set new value to ' + newValue);
-        Session.set('firstname', newValue);
-      }});
-
-  $('#gender.editable').editable({
-    value:1,
-    source: [
-      {value:1, text: 'Male'},
-      {value:2,text:'Female'}
-    ]
-  });
-
-  $('#skill.editable').editable({
-    value:1,
-    source: [
-      {value:1, text: '2.0'},
-      {value:2,text:'2.5'},
-      {value:3,text:'3.0'},
-      {value:4,text:'3.5'},
-      {value:5,text:'4.0'},
-      {value:6,text:'4.5'}
-    ]
-  });
-}
-
 
 // Events
 
@@ -65,7 +15,7 @@ Template.add.events({
   },
   'click .map-list' : function(event) {
     if ($('#sidebar-extension').css('width') === '0px') {
-      $('#sidebar-extension').css('width','400px');
+      $('#sidebar-extension').css('width','1200px');
       $('#profile-interface').css('visibility','visible');
     }
     else {
@@ -73,9 +23,39 @@ Template.add.events({
       $('#profile-interface').css('visibility','hidden');
     }
   },
+  'click .logout' : function(event) {
+    event.preventDefault();
+    Meteor.logout();
+  }
 });
 
-// Helper Functions
+
+Template.navbar.events( {
+'click .profile-submit' : function(event) {
+  event.preventDefault();
+  Meteor.users.update({_id:Meteor.user()._id},{$set : {'profile.firstName' : $('#firstName').val()}})
+  Meteor.users.update({_id:Meteor.user()._id},{$set : {'username' : $('#username').val() }})
+  Meteor.users.update({_id:Meteor.user()._id},{$set : {'profile.lastName' :$('#lastName').val() }})
+  Meteor.users.update({_id:Meteor.user()._id},{$set : {'profile.gender' : $('#user_gender').val() }})
+  Meteor.users.update({_id:Meteor.user()._id},{$set : {'profile.skill' : $('#user_skill').val() }})
+  $('#profile-interface').css('visibility','hidden');
+  $('#sidebar-extension').css('width','0px')
+
+},
+
+'click .profile-cancel' : function() {
+  $('#sidebar-extension').css('width','0px')
+  $('#profile-interface').css('visibility','hidden');
+  }
+});
+
+//Helpers
+
+Template.navbar.helpers( {
+  'user' : function() {
+    return Meteor.user();
+  }
+})
 
 Template.add.helpers( {
   exampleMapOptions: function(){
@@ -85,17 +65,7 @@ Template.add.helpers( {
         zoom: 12,
         disableDefaultUI: true};
     }
-  },
-  'username': function () {
-    return Session.get('username');
-  },
-  'firstname' : function() {
-    return Session.get('firstname');
-  },
-  'lastname' : function() {
-    return Session.get('lastname');
-  }
-});
+  }});
 
 Template.add.onCreated(function() {
   GoogleMaps.ready('exampleMap',function(map){

@@ -51,6 +51,13 @@
 
 }
 
+.sidebar-form {
+  width:250px;
+  text-align:center;
+  margin:0 auto;
+
+}
+
 #wrapper.toggled #sidebar-wrapper {
     width: 250px;
 }
