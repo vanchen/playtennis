@@ -14,10 +14,6 @@ Router.route("/", function(){
   this.render('landing');
 }, {name : 'landing'});
 
-Router.route('host', function () {
-  this.render('add');
+Router.route('map', function () {
+  this.render('map');
 }, {name: 'host'});
-
-Router.route("join", function(){
-  this.render('join');
-}, {name : 'join'});

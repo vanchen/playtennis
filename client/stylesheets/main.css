@@ -15,6 +15,10 @@
 #profile-interface{
   visibility: hidden;
 }
+
+#match-listings{
+  visibility: hidden;
+}
 /* Landing Page Styles */
 
 .header {
@@ -126,8 +130,10 @@
   font-size: 20px;
 }
 
-.content-info {
-  margin-left: 110px;
+.match-details {
+  margin-right: 25px;
+  margin-top: 5px;
+  font-size: 10px;
 }
 
 .details {
