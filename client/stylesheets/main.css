@@ -6,8 +6,13 @@
     margin-top: 5px;
     background: transparent;
     border-bottom: 0px;
-  }
 
+
+  }
+.hide-menu {
+  visibility: visible;
+
+}
 .dropdown-map{
   display:inline-block;
 }
@@ -19,6 +24,46 @@
 #match-listings{
   visibility: hidden;
 }
+
+
+/* Match Listing Styles */
+
+.match-details {
+  margin-right: 15px;
+  font-size: 10px;
+
+}
+
+.match-listing {
+  margin-top: -15px;
+  margin-bottom: -15px;
+
+}
+.match-avatar {
+  margin-bottom: -10px;
+
+}
+
+.matches {
+  width:500px;
+}
+
+.testing:hover {
+  background-color: #eff2fa;
+
+}
+
+
+/* Match Details Styles */
+
+#match-details {
+  visibility: hidden;
+}
+.match-details-heading {
+  margin-left: 10px;
+}
+
+
 /* Landing Page Styles */
 
 .header {
@@ -57,8 +102,9 @@
 
 .btn-dark {
     border-radius: 0;
-    color: #fff;
-    background-color: rgba(0,0,0,0.4);
+    border: 0px;
+    color: #000;
+
 }
 
 .btn-join{
@@ -68,8 +114,8 @@
 .btn-dark:hover,
 .btn-dark:focus,
 .btn-dark:active {
-    color: #fff;
-    background-color: rgba(0,0,0,0.7);
+    color: #0f2426;
+    background-color: #eff2fa;
 }
 
 .btn-light {
@@ -130,12 +176,6 @@
   font-size: 20px;
 }
 
-.match-details {
-  margin-right: 25px;
-  margin-top: 5px;
-  font-size: 10px;
-}
-
 .details {
   font-size:10px;
   margin-top: 20px;
@@ -169,4 +209,18 @@ body{
       top:0px;
       bottom:0;
       overflow:hidden;
+}
+
+#sidebar-extensions-map{
+  margin-left:605px;
+  height: 50%;
+  width:0px;
+  z-index: 1000;
+  position:absolute;
+  visibility:visible;
+  background: #fff;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;
 }

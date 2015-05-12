@@ -1,0 +1,70 @@
+<template name="details">
+
+
+<div id="sidebar-extensions-map">
+
+  {{> googleMap name="exampleMap2" options=exampleMapOptions2}}
+
+  <div id="sidebar-extension-matches">
+
+  <div class="row">
+    <div class="col-md-8 col-xs-10">
+      <div class="well panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-xs-12 col-sm-4 text-center">
+              <img src="http://api.randomuser.me/portraits/women/21.jpg" alt="" class="center-block img-circle img-thumbnail img-responsive">
+              <ul class="list-inline ratings text-center" title="Ratings">
+                <li><a href="#"><span class="fa fa-star fa-lg"></span></a></li>
+                <li><a href="#"><span class="fa fa-star fa-lg"></span></a></li>
+                <li><a href="#"><span class="fa fa-star fa-lg"></span></a></li>
+                <li><a href="#"><span class="fa fa-star fa-lg"></span></a></li>
+                <li><a href="#"><span class="fa fa-star fa-lg"></span></a></li>
+              </ul>
+            </div>
+            <!--/col-->
+            <div class="col-xs-12 col-sm-8">
+              <h2>{{match.title}}</h2>
+              <p><strong>Challenger: </strong> {{match.author}}</p>
+              <p> <strong> Courts: </strong> {{match.court}} </p>
+              <p><strong> Skill Level: </strong> {{match.type}} Singles </p>
+              <p><strong> Time: </strong>
+                <span class="label label-info tags">{{match.time}}</span>
+              </p>
+
+            </div>
+            <!--/col-->
+            <div class="clearfix"></div>
+
+            <div class="col-xs-12 col-sm-4">
+
+
+              <button class="btn btn-success btn-block"><span class="fa fa-plus-circle"></span> Accept </button>
+            </div>
+            <!--/col-->
+            <div class="col-xs-12 col-sm-4">
+
+
+              <button class="btn btn-info btn-block"><span class="fa fa-user"></span> Cancel </button>
+            </div>
+            <!--/col-->
+
+
+            <!--/col-->
+          </div>
+          <!--/row-->
+        </div>
+        <!--/panel-body-->
+      </div>
+      <!--/panel-->
+    </div>
+    <!--/col-->
+  </div>
+  <!--/row-->
+
+<!--/container-->
+  </div>
+
+</div>
+
+</template>

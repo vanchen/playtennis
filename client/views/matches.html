@@ -1,9 +1,10 @@
 <template name = "matches">
+  <div class="testing ">
   <hr>
   <div class="container matches" id="{{_id}}">
     <div class="row">
 
-      <div class="col-sm-4">
+      <div class="col-sm-9 match-listing">
         <h4> {{title}} </h4>
         <p>
           <span class="glyphicon glyphicon-user match-details"> {{author}} </span>
@@ -12,11 +13,13 @@
         </p>
       </div>
 
-      <div class="col-sm-1">
-        <img src="/img/default.jpg" class="avatar img-circle img-thumbnail match-avatar" alt="avatar">
+      <div class="col-sm-2 avatar-listing">
+        <img src="/img/default.jpg" class="avatar  match-post img-circle img-thumbnail match-avatar"  alt="avatar">
       </div>
    </div>
 
   </div>
   <hr>
+</div>
+
 </template>

@@ -100,58 +100,18 @@ Template.map.events({
   },
 
   // Match Listings Events //
-  "click .match-avatar" : function(event) {
-    bootbox.dialog({
-      title: "User Profile",
-      message:
-      '<div class="row">'+
-      '<div class="col-md-12 col-xs-10">'+
-      '<div class="well panel panel-default">'+
-      '<div class="panel-body">'+
-      '<div class="row">'+
-      '<div class="col-xs-12 col-sm-4 text-center">'+
-      '<img src="http://api.randomuser.me/portraits/women/21.jpg" alt="" class="center-block img-circle img-thumbnail img-responsive">'+
-      '<ul class="list-inline ratings text-center" title="Ratings">'+
-      '<li><a href="#"><span class="fa fa-star fa-lg"></span></a></li>'+
-      '<li><a href="#"><span class="fa fa-star fa-lg"></span></a></li>'+
-      '<li><a href="#"><span class="fa fa-star fa-lg"></span></a></li>'+
-      '<li><a href="#"><span class="fa fa-star fa-lg"></span></a></li>'+
-      '<li><a href="#"><span class="fa fa-star fa-lg"></span></a></li>'+
-      '</ul>'+
-      '</div>'+
-      '<!--/col--> '+
-      '<div class="col-xs-12 col-sm-8">'+
-      '<h2>Jane Doe</h2>'+
-      '<p class="t"><strong> About: </strong> Web Designer / UI Expert. </p>'+
-      '<p><strong>Hobbies: </strong> Read, out with friends, listen to music, draw and learn new things. </p>'+
-      '<p><strong>Skills: </strong>'+
-      '<span class="label label-info tags">html5</span> '+
-      '<span class="label label-info tags">css3</span>'+
-      '<span class="label label-info tags">jquery</span>'+
-      '<span class="label label-info tags">bootstrap3</span>'+
-      '</p>'+
-      '</div>'+
-      '</div>'+
-      '<!--/row-->'+
-      '</div>'+
-      '<!--/panel-body-->'+
-      '</div>'+
-      '<!--/panel-->'+
-      '</div>'+
-      '<!--/col--> '+
-      '</div>'+
-      '<!--/row--> '+
-      '</div>'
-    });
-  },
+
   'mouseenter .matches': function(event) {
     var court = Posts.findOne($(event.target).attr("id")).court;
+    var id = $(event.target).attr("id");
+    Session.set('match-id',id)
     markers.forEach(function(m) {
       if (m['title'] === court) {
         m.setAnimation(google.maps.Animation.BOUNCE);
       }
     });
   },
+
   "mouseleave .matches": function(event) {
     markers.forEach(function(m) {
       if (m.setAnimation != null) {
@@ -193,6 +153,12 @@ Template.navbar.helpers( {
   },
   'sideBar' : function() {
     return Session.get('sidebar')
+  }
+});
+
+Template.details.helpers( {
+  'match' : function() {
+    return Posts.findOne(Session.get('match-id'));
   }
 });
 

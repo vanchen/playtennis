@@ -19,21 +19,26 @@
 
 <!-- Extended Sidebar Menu -->
 
-<div id= "sidebar-extension">
+<div id="bring">
 
-{{#if sideBar}}
-  {{>profile}}
 
-{{else}}
-<!-- Match list page -->
-  <div id="match-listings">
-  
-      {{#each posts}}
-        {{>matches}}
-      {{/each}}
-    </div>
+  <div id= "sidebar-extension">
 
-{{/if}}
 <!-- Profile Page -->
+    {{#if sideBar}}
+      {{>profile}}
+    {{else}}
+
+<!-- Match list page -->
+      <div id="match-listings">
+
+        {{#each posts}}
+          {{>matches}}
+        {{/each}}
+
+     </div>
+    {{/if}}
+  </div>
+
 </div>
 </template>

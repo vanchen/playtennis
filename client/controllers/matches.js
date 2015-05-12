@@ -50,46 +50,70 @@ var styles = [
 // Helper functions
 //
 
-Template.join.events({
-  "mouseenter .h": function(event) {
-    var court = Posts.findOne($(event.target).attr("id")).court;
-    markers.forEach(function(m) {
-      if (m['title'] === court) {
-        m.setAnimation(google.maps.Animation.BOUNCE);
-      }
-    });
-  },
-  "click .logout": function(event) {
-    event.preventDefault();
-    Meteor.logout();
-  },
-  "mouseleave .h": function(event) {
-    markers.forEach(function(m) {
-      if (m.setAnimation != null) {
-        m.setAnimation(null);
-      }
-    });
+
+Template.map.events({
+'click .match-avatar': function(event) {
+  var id = Session.get('match-id');
+  var rendered = Blaze.render(Template.details,$('#bring')[0]);
+  Session.set('noRender',false)
+  if ($('#sidebar-extensions-map').css('width') === '0px') {
+    $('.hide-menu').css('visibility','hidden');
+    $('#sidebar-extensions-map').css('width','60.5%');
+    $('#sidebar-extension-matches').css('width','95%');
+    $('#sidebar-extension-matches').css('visibility','visible');
   }
+  else {
+    $('#sidebar-extension-matches').css('width','0px');
+    $('#sidebar-extension-matches').css('visibility','hidden');
+    $('#sidebar-extensions-map').css('width','0px')
+    $('.hide-menu').css('visibility','visible');
+    Session.set('noRender',true)
+  }
+}
 });
 
-// Executed once the page is succesfully loaded.
-
-Template.join.onCreated(function() {
-  GoogleMaps.ready('exampleMap',function(map){
-      markers = [];
-      Courts.find().forEach(function(court) {
-      LatLng = new google.maps.LatLng(court.Lat,court.Lng);
-      var image = '/img/tennis.png';
-      var marker = new google.maps.Marker({
-          position: LatLng,
-          map: map.instance,
-          icon: image,
-          title: court.Name,
-        });
-      markers.push(marker);
-      google.maps.event.addListener(marker,'click', function() {
-        Router.go('court', data={Name: court.Name});
-        });
-      });
-    });
+  Template.details.helpers( {
+    exampleMapOptions2: function(){
+      var match_id = Session.get('match-id');
+      court = Courts.findOne({Name: Posts.findOne(match_id).court});
+      if (GoogleMaps.loaded()) {
+        return {
+          center: new google.maps.LatLng(court.Lat,court.Lng),
+          zoom: 12,
+          styles: styles,
+          disableDefaultUI: true};
+      }
+    },
+    'noRender' : function() {
+      return Session.get('noRender');
+    }
   });
+
+
+  Template.details.onRendered(function() {
+    GoogleMaps.ready('exampleMap2',function(map){
+        markers = [];
+        maps = [map];
+        //bootbox.alert("Choose a court to host your match.");
+
+        var match_id = Session.get('match-id');
+        court = Courts.findOne({Name: Posts.findOne(match_id).court});
+        console.log(court)
+        center = new google.maps.LatLng(court.Lat,court.Lng)
+        LatLng = new google.maps.LatLng(court.Lat,court.Lng);
+        var image = '/img/tennis.png';
+        var marker = new google.maps.Marker({
+            position: LatLng,
+            map: map.instance,
+            icon: image,
+            title: court.Name,
+          });
+
+          google.maps.event.addListenerOnce(map.instance, 'idle', function() {
+            Meteor.setTimeout(function() {
+              google.maps.event.trigger(map.instance, 'resize');
+              map.instance.setCenter(center);
+            },500)
+          });
+        })
+      });

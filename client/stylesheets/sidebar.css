@@ -51,6 +51,21 @@
 
 }
 
+#sidebar-extension-matches {
+  height: 100%;
+  width:0%;
+  z-index: 1000;
+  position:fixed;
+  visibility:hidden;
+
+  background: #fff;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;
+
+}
+
 .sidebar-form {
   width:250px;
   text-align:center;
