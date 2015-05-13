@@ -31,11 +31,17 @@
 
 <!-- Match list page -->
       <div id="match-listings">
+        <!-- Code here to decide which match is shown -->
+        {{#if matchOn}}
+          {{#with match}}
+            {{>matches}}
+          {{/with}}
 
-        {{#each posts}}
-          {{>matches}}
-        {{/each}}
-
+        {{else}}
+          {{#each posts}}
+            {{>matches}}
+          {{/each}}
+        {{/if}}
      </div>
     {{/if}}
   </div>

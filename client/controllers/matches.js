@@ -52,10 +52,10 @@ var styles = [
 
 
 Template.map.events({
-'click .match-avatar': function(event) {
+'click .match-enlarge': function(event) {
   var id = Session.get('match-id');
   var rendered = Blaze.render(Template.details,$('#bring')[0]);
-  Session.set('noRender',false)
+  Session.set('matchOn',true)
   if ($('#sidebar-extensions-map').css('width') === '0px') {
     $('.hide-menu').css('visibility','hidden');
     $('#sidebar-extensions-map').css('width','60.5%');
@@ -67,10 +67,22 @@ Template.map.events({
     $('#sidebar-extension-matches').css('visibility','hidden');
     $('#sidebar-extensions-map').css('width','0px')
     $('.hide-menu').css('visibility','visible');
-    Session.set('noRender',true)
+    Session.set('matchOn',false)
   }
 }
 });
+
+Template.matches.helpers({
+  'matchOn' : function() {
+    return Session.get('matchOn');
+  },
+  'user' : function() {
+    var id = Session.get('match-id');
+    return Meteor.users.findOne({'username' : Posts.findOne(id).author});
+
+  }
+});
+
 
   Template.details.helpers( {
     exampleMapOptions2: function(){
@@ -83,9 +95,6 @@ Template.map.events({
           styles: styles,
           disableDefaultUI: true};
       }
-    },
-    'noRender' : function() {
-      return Session.get('noRender');
     }
   });
 

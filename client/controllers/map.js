@@ -153,6 +153,12 @@ Template.navbar.helpers( {
   },
   'sideBar' : function() {
     return Session.get('sidebar')
+  },
+  'match' : function() {
+    return Posts.findOne(Session.get('match-id'));
+  },
+  'matchOn' : function() {
+    return Session.get('matchOn');
   }
 });
 

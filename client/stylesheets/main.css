@@ -53,6 +53,10 @@
 
 }
 
+.match-enlarge {
+  margin-right:20px;
+}
+
 
 /* Match Details Styles */
 
@@ -213,7 +217,7 @@ body{
 
 #sidebar-extensions-map{
   margin-left:605px;
-  height: 50%;
+  height: 100%;
   width:0px;
   z-index: 1000;
   position:absolute;
