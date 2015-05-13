@@ -5,6 +5,7 @@ Bootstrap 3 Clock Picker - http://weareoutman.github.io/clockpicker/
 Kickbox Email Verification - https://kickbox.io/app/#/ (Beautiful login and signup form)
 MailGun https://mailgun.com/app/dashboard (For sending emails from Meteor.)
 X-editable
+http://subtlepatterns.com/gplay/  - Excellent resource for backgrounds
 
 FUNCTIONALITY
 

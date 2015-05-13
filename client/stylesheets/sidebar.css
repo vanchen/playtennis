@@ -29,7 +29,7 @@
     margin-left: -250px;
     overflow-y: auto;
 
-    background: #0f2426;
+    background: url(../img/vertical_cloth.png);
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -43,7 +43,7 @@
   z-index: 1000;
   position:fixed;
   box-shadow: 0 0 30px black;
-  background: #fff;
+  background: url(../img/pinstripe.png);
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
@@ -51,20 +51,6 @@
 
 }
 
-#sidebar-extension-matches {
-  height: 100%;
-  width:0%;
-  z-index: 1000;
-  position:fixed;
-  visibility:hidden;
-
-  background: #fff;
-  -webkit-transition: all 1s ease;
-  -moz-transition: all 1s ease;
-  -o-transition: all 1s ease;
-  transition: all 1s ease;
-
-}
 
 .sidebar-form {
   width:250px;
