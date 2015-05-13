@@ -160,13 +160,14 @@ body{
 #sidebar-extensions-map{
   margin-left:605px;
   height: 100%;
-  width:0px;
+  width:60.5%;
   z-index: 1000;
   position:absolute;
-  visibility:visible;
+  visibility:hidden;
+  opacity: 0;
   background: #fff;
-  -webkit-transition: all 1s ease;
-  -moz-transition: all 1s ease;
-  -o-transition: all 1s ease;
-  transition: all 1s ease;
+  -webkit-transition: all 2s ease;
+  -moz-transition: all 2s ease;
+  -o-transition: all 2s ease;
+  transition: all 2s ease;
 }

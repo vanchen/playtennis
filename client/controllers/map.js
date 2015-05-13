@@ -1,5 +1,5 @@
 //Setting the style for Google Maps
-
+maps = [];
 var markers = [];
 var styles = [
       {
@@ -105,6 +105,7 @@ Template.map.events({
     var court = Posts.findOne($(event.target).attr("id")).court;
     var id = $(event.target).attr("id");
     Session.set('match-id',id)
+    Session.set('mapOn',true);
     markers.forEach(function(m) {
       if (m['title'] === court) {
         m.setAnimation(google.maps.Animation.BOUNCE);
@@ -182,7 +183,7 @@ Template.map.helpers( {
 Template.map.onCreated(function() {
   GoogleMaps.ready('exampleMap',function(map){
       markers = [];
-      maps = [map];
+      maps[0]=map;
       //bootbox.alert("Choose a court to host your match.");
       Courts.find().forEach(function(court) {
       LatLng = new google.maps.LatLng(court.Lat,court.Lng);
