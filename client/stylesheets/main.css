@@ -58,6 +58,11 @@
 
 .match-enlarge {
   margin-right:20px;
+  cursor: pointer;
+}
+
+.match-enlarge:hover{
+  background-color:  #f2f2f2;
 }
 
 
@@ -94,8 +99,11 @@
   padding: 5px;
   box-shadow: 0.5px 0.5px 1px #000;
 }
-.match-box:hover {
-  background-color: #f2f2f2;
+
+.title {
+font-family: "Source Sans Pro";
+font-size: 20px;
+
 }
 
 /* Landing Page Styles */

@@ -23,14 +23,16 @@
     </div>
       </div>
       {{else}}
-      <div class="col-sm-6">
-        <div class=" match-box match-enlarge matches" id="{{_id}}">
 
-          <h5> <strong>{{title}}</strong> </h5>
-          <h4> <small> Best of 3 match @ {{court}} </small> </h4>
-          <h5><small><span class="glyphicon glyphicon-user" style = "margin-right:3px"> </span> {{author}}
-          <span class="glyphicon glyphicon-time" style= "margin-right:3px"> </span>{{time}}</small></h5>
+      <div class="col-sm-6">
+
+        <div class=" match-box match-enlarge matches" id="{{_id}}" >
+          <span class="title"> {{title}} </span>
+          <br>
+          <h3> <small> Best of 3 match with <strong>{{author}} @ {{court}} </strong> </small> </h3>
+
       </div>
+
     </div>
 
       {{/if}}

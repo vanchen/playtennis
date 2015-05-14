@@ -103,23 +103,26 @@ Template.map.events({
   // Match Listings Events //
 
   'mouseenter .matches': function(event) {
-    var court = Posts.findOne($(event.target).attr("id")).court;
+    //$(event.target).css('background-color','#f2f2f2')
+    //var court = Posts.findOne($(event.target).attr("id")).court;
     var id = $(event.target).attr("id");
-    Session.set('match-id',id)
+
+    Session.set('match-id',id);
     Session.set('mapOn',true);
-    markers.forEach(function(m) {
-      if (m['title'] === court) {
-        m.setAnimation(google.maps.Animation.BOUNCE);
-      }
-    });
+    //markers.forEach(function(m) {
+    //  if (m['title'] === court) {
+    //    m.setAnimation(google.maps.Animation.BOUNCE);
+      //}
+    //});
   },
 
   "mouseleave .matches": function(event) {
-    markers.forEach(function(m) {
-      if (m.setAnimation != null) {
-        m.setAnimation(null);
-      }
-    });
+    //$(event.target).css('background-color','#fff')
+    //markers.forEach(function(m) {
+      //if (m.setAnimation != null) {
+        //m.setAnimation(null);
+      //}
+    //});
   },
 
   // Profile Events //

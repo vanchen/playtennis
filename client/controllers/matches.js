@@ -69,7 +69,8 @@ Template.map.events({
 'click .match-enlarge': function(event) {
   var pos = new google.maps.LatLng(Geolocation.latLng().lat,Geolocation.latLng().lng);
   var id = Session.get('match-id');
-  //var id2 = $(event.target).attr("id");
+  //var id2 = $(event.target.parentNode).attr("id");
+  //Session.set('match-id',id2)
   Session.set('matchOn',true)
   if ($('#sidebar-extensions-map').css('visibility') === 'hidden') {
     $('.hide-menu').css('visibility','hidden');
