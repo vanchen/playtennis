@@ -1,9 +1,10 @@
 <template name = "matches">
-  <div class="testing">
-  <hr>
-  <div class="container matches" id="{{_id}}">
-    <div class="row">
+
+
       {{#if matchOn}}
+      <div class="testing">
+      <hr>
+      <div class="container matches2" id="{{_id}}">
       <div class="col-sm-4 avatar-listing">
         <img src="/img/default.jpg" class="avatar  match-post img-circle img-thumbnail match-avatar"  alt="avatar">
       </div>
@@ -17,33 +18,25 @@
         <button type="button" class="btn btn-default match-enlarge">
             <span class="glyphicon glyphicon-chevron-left"> </span>
         </button>
-
+      </div>
+      <hr>
+    </div>
       </div>
       {{else}}
-      <div class="col-sm-2 avatar-listing">
-        <img src="/img/default.jpg" class="avatar  match-post img-circle img-thumbnail match-avatar"  alt="avatar">
-      </div>
+      <div class="col-sm-4">
+        <div class="matches match-box match-enlarge" id="{{_id}}">
 
-      <div class="col-sm-8 match-listing">
-        <h4> {{title}} </h4>
-        <p>
-          <span class="glyphicon glyphicon-user match-details"> {{author}} </span>
-          <span class="glyphicon glyphicon-globe match-details"> {{court}} </span>
-          <span class ="glyphicon glyphicon-time match-details"> {{time}}</span>
-        </p>
+          <h5> <strong>{{title}}</strong> </h5>
+          <h4> <small> Best of 3 match @ {{court}} </small> </h4>
+          <h5><small><span class="glyphicon glyphicon-user" style = "margin-right:3px"> </span> {{author}}
+          <span class="glyphicon glyphicon-time" style= "margin-right:3px"> </span>{{time}}</small></h5>
       </div>
-      <div class="col-sm-1">
-        <button type="button" class="btn btn-default match-enlarge">
-            <span class="glyphicon glyphicon-resize-full"> </span>
-        </button>
+    </div>
 
-      </div>
       {{/if}}
-   </div>
 
-  </div>
-  <hr>
-</div>
+
+
 
 {{#if matchOn}}
   <div id="match-on-details">

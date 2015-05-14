@@ -48,7 +48,9 @@
 
 }
 
-.matches {
+
+
+.matches2 {
   width:500px;
 }
 
@@ -83,6 +85,19 @@
   overflow-y: hidden;
 
 }
+
+.match-box {
+  height: 150px;
+  width: 150px;
+  margin: 10px;
+  background: #fff;
+  padding: 5px;
+  box-shadow: 0.5px 0.5px 1px #000;
+}
+.match-box:hover {
+  background-color: #f2f2f2;
+}
+
 /* Landing Page Styles */
 
 #top {

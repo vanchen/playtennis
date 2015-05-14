@@ -89,7 +89,7 @@ Template.map.events({
     Session.set('sidebar',false)
     Meteor.setTimeout(function () {
       if ($('#sidebar-extension').css('width') === '0px') {
-        $('#sidebar-extension').css('width','500px');
+        $('#sidebar-extension').css('width','550px');
         $('#match-listings').css('visibility','visible')
       }
       else {
