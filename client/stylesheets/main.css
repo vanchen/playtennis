@@ -26,6 +26,10 @@
 }
 
 
+
+/* Profile Styles */
+
+
 /* Match Listing Styles */
 
 .match-details {
@@ -64,19 +68,34 @@
   margin-left: 10px;
 }
 
+#googledirections {
+  height: 300px;
+  overflow: auto;
+}
 
+#match-listings {
+  height: 800px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#match-on-details {
+  overflow-y: hidden;
+
+}
 /* Landing Page Styles */
 
+#top {
+  opacity: 1;
+
+}
 .header {
     display: table;
     position: relative;
     width: 100%;
     height: 100%;
-    background: url(../img/bg2.jpg) no-repeat center center scroll;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
+    background: url(../img/noisy_net.png);
+
 }
 
 .text-vertical-center {

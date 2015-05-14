@@ -1,6 +1,7 @@
 //Defining global varibles
 //
 
+
 var markers = [];
 var styles = [
       {
@@ -66,6 +67,7 @@ Template.registerHelper('exampleMapOptions2',function(){
 
 Template.map.events({
 'click .match-enlarge': function(event) {
+  var pos = new google.maps.LatLng(Geolocation.latLng().lat,Geolocation.latLng().lng);
   var id = Session.get('match-id');
   Session.set('matchOn',true)
   if ($('#sidebar-extensions-map').css('visibility') === 'hidden') {
@@ -76,14 +78,24 @@ Template.map.events({
     $('#sidebar-extension-matches').css('width','95%');
     $('#sidebar-extension-matches').css('visibility','visible');
     var court = Courts.findOne({Name: Posts.findOne(id).court});
-    var center = new google.maps.LatLng(court.Lat,court.Lng)
     var LatLng = new google.maps.LatLng(court.Lat,court.Lng);
     markers[0].setPosition(LatLng);
     markers[0].setTitle(court.Name);
     markers[0].setMap(maps2[0].instance)
-    maps2[0].instance.setCenter(center);
+    maps2[0].instance.setCenter(LatLng);
+    var request = {
+      origin: pos,
+      destination : LatLng,
+      travelMode: google.maps.TravelMode.DRIVING
+    };
 
-    // Change Google maps functionality here.
+    directionsService.route(request, function(response, status) {
+      if (status == google.maps.DirectionsStatus.OK) {
+        directionsDisplay.setDirections(response);
+        directionsDisplay.setPanel(document.getElementById('googledirections'));
+   }
+ });
+
   }
   else {
     $('#sidebar-extension-matches').css('width','0px');
@@ -113,7 +125,10 @@ Template.matches.helpers({
   Template.details.onCreated(function() {
       GoogleMaps.ready('exampleMap2',function(map2){
         markers = [];
+        //directionDisplay;
         maps2 = [map2];
+        directionsDisplay = new google.maps.DirectionsRenderer();
+        directionsService = new google.maps.DirectionsService();
         var match_id = Session.get('match-id');
         var court = Courts.findOne({Name: Posts.findOne(match_id).court});
         var center = new google.maps.LatLng(court.Lat,court.Lng)
@@ -126,5 +141,8 @@ Template.matches.helpers({
             title: court.Name,
           });
           markers.push(marker);
+
+          directionsDisplay.setMap(map2.instance);
+
         })
       });

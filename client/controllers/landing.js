@@ -29,7 +29,8 @@ Template.landing.events({
                 bootbox.alert(error.reason)
               }
               else {
-                Router.go('host')
+                  Router.go('host')
+                  location.reload();
               }
             });
           }
@@ -42,7 +43,9 @@ Template.landing.events({
           bootbox.alert(error.reason)
         }
         else {
-          Router.go('host')
+            Router.go('host')
+            location.reload();
+
         }
       });
     }

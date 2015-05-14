@@ -30,12 +30,14 @@
 <!-- Match list page -->
       <div id="match-listings">
         <!-- Code here to decide which match is shown -->
+
         {{#if matchOn}}
           {{#with match}}
             {{>matches}}
           {{/with}}
 
         {{else}}
+
           {{#each posts}}
             {{>matches}}
           {{/each}}

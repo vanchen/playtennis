@@ -1,5 +1,10 @@
 <template name="map">
 
+  <div class="map-container-host">
+    {{> googleMap name="exampleMap" options=exampleMapOptions}}
+  </div>
+
+
 <!-- Sidebar  -->
 
   {{>navbar}}
@@ -12,7 +17,7 @@
       <ul class="nav navbar-nav">
         <div class="dropdown dropdown-map">
           <button class="btn btn-default dropdown-toggle hide-menu" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-            <span class=" glyphicon glyphicon-user"></span>
+            <span class=" glyphicon glyphicon-log-out"></span>
           </button>
           <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
             <li role="presentation"><a role="menuitem" class = "logout" tabindex="-1" href="#">Logout</a></li>
@@ -38,8 +43,6 @@
 
 <!-- Map Container -->
 
-<div class="map-container-host">
-  {{> googleMap name="exampleMap" options=exampleMapOptions}}
-</div>
+
 
 </template>

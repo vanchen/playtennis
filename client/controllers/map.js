@@ -1,3 +1,4 @@
+
 //Setting the style for Google Maps
 maps = [];
 var markers = [];
@@ -169,6 +170,13 @@ Template.details.helpers( {
   }
 });
 
+Template.profile.helpers( {
+  'user' : function() {
+    return Meteor.user();
+  }
+});
+
+
 Template.map.helpers( {
   exampleMapOptions: function(){
     if (GoogleMaps.loaded()) {
@@ -178,9 +186,11 @@ Template.map.helpers( {
         styles: styles,
         disableDefaultUI: true};
     }
+
   }});
 
-Template.map.onCreated(function() {
+Template.map.onRendered(function() {
+  console.log("Does this run initially?")
   GoogleMaps.ready('exampleMap',function(map){
       markers = [];
       maps[0]=map;
@@ -257,7 +267,6 @@ Template.map.onCreated(function() {
       google.maps.event.addListener(info, "closeclick", function() {
 
       });
-
-      });
     });
+  });
   });

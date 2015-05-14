@@ -1,5 +1,5 @@
 <template name = "matches">
-  <div class="testing ">
+  <div class="testing">
   <hr>
   <div class="container matches" id="{{_id}}">
     <div class="row">
@@ -46,12 +46,15 @@
 </div>
 
 {{#if matchOn}}
-
+  <div id="match-on-details">
     <h3 class="text-center">Match @ {{court}}<br></h3>
-  <h3 class="text-center"><small> This match is scheduled at <strong> {{time}} </strong>, approximately <strong> 20km </strong> from your location. The author <strong> {{author}} </strong>
+  <h3 class="text-center"><small> This match is scheduled at <strong> {{time}} </strong>.  The author <strong> {{author}} </strong>
   would like to play a <strong> type </strong> match. </small> </h3>
+  <div id="googledirections">
+  </div>
   <h3 class="text-center"><button type='button' class="btn btn-default btn-block"> <h4> Play Match </h4> </button></h3>
   <hr>
+</div>
 {{/if}}
 
 </template>
