@@ -1,48 +1,38 @@
 <template name="map">
 
-  <div class="map-container-host">
-    {{> googleMap name="exampleMap" options=exampleMapOptions}}
+<!-- Match Map Container -->
+{{>map_details}}
+
+<!-- Navigation Bars -->
+{{>navbar}}
+
+<!-- Profile Page -->
+<div id= "sidebar-extension">
+
+{{#if sideBar}}
+  {{>profile}}
+{{else}}
+
+<!-- Match list page. Two routes, depending on Session variable 'matchOn' -->
+  <div id="match-listings">
+  {{#if matchOn}}
+    {{#with match}}
+      {{>matches}}
+    {{/with}}
+
+  {{else}}
+    {{#each posts}}
+      {{>matches}}
+    {{/each}}
+
+  {{/if}}
   </div>
+{{/if}}
+</div>
 
-
-<!-- Sidebar  -->
-
-  {{>navbar}}
-
-<!-- Map Menu -->
-
-<nav class="navbar navbar-default navbar-fixed-top navbar-map" role="navigation">
-  <div class="container-fluid">
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <div class="dropdown dropdown-map">
-          <button class="btn btn-default dropdown-toggle hide-menu" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-            <span class=" glyphicon glyphicon-log-out"></span>
-          </button>
-          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-            <li role="presentation"><a role="menuitem" class = "logout" tabindex="-1" href="#">Logout</a></li>
-          </ul>
-        </div>
-          <button class="btn btn-default dropdown-toggle gps hide-menu" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-            <span class=" glyphicon glyphicon-screenshot"></span>
-          </button>
-          <div class="dropdown dropdown-map">
-          <button class="btn btn-default dropdown-toggle hide-menu" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-            <span class=" glyphicon glyphicon-plus"></span>
-          </button>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-              <li role="presentation"><a role="menuitem" class = "logout" tabindex="-1" href="#">Action</a></li>
-            </ul>
-          </div>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-
-
-<!-- Map Container -->
-
-
+<!-- Primary Map Container -->
+<div class="map-container-host">
+  {{> googleMap name="exampleMap" options=exampleMapOptions}}
+</div>
 
 </template>

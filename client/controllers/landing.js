@@ -1,3 +1,7 @@
+/////////////
+// Events //
+////////////
+
 Template.landing.events({
   'click .login' : function() {
     Session.set('createOrSignIn','signin')
