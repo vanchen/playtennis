@@ -31,6 +31,22 @@
   <hr>
 </div>
 {{else}}
+  {{#if courtTrue}}
+    <div class="container" style="box-shadow: 0 0 3px #000; background: url(../img/noisy_net.png); color: #fff">
+      <h3> Current matches @ <strong> {{postName.court}} </strong> </h3>
+    </div>
+    {{#each post}}
+      <div class="col-sm-6">
+        <div class=" match-box match-enlarge matches" id="{{_id}}" >
+          <span class="title"> {{title}} </span>
+          <br>
+          <h3> <small> Best of 3 match with <strong>{{author}} @ {{court}} </strong> </small> </h3>
+          <br>
+        </div>
+      </div>
+    {{/each}}
+  {{else}}
+    {{#each posts}}
   <div class="col-sm-6">
     <div class=" match-box match-enlarge matches" id="{{_id}}" >
       <span class="title"> {{title}} </span>
@@ -39,6 +55,8 @@
       <br>
     </div>
   </div>
+  {{/each}}
+  {{/if}}
 {{/if}}
 
 </template>

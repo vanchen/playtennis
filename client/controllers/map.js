@@ -4,6 +4,7 @@
 
 maps = [];
 markers = [];
+new_markers = [];
 styles = [
       {
           "featureType": "road",
@@ -49,6 +50,12 @@ styles = [
       }
 ];
 
+///////////////
+// Functions //
+///////////////
+
+
+
 ////////////
 // Events //
 ////////////
@@ -59,24 +66,42 @@ Template.map.events({
   'click .gps' : function(event) {
     var pos = Geolocation.latLng();
     var google_pos = new google.maps.LatLng(pos.lat,pos.lng);
-
-    var marker = new google.maps.Marker({
-        position: google_pos,
-        map: maps[0].instance,
-        icon: '/img/blue_dot.png',
-      });
-      maps[0].instance.setCenter(google_pos);
+    maps[0].instance.setCenter(google_pos);
   },
-  'click .logout' : function(event) {
-    event.preventDefault();
-    Meteor.logout();
-    Router.go('/')
+  'click .host' : function(event) {
+    Session.set('toggle',true);
+    for (var i =0; i < new_markers.length ; i++) {
+      new_markers[i].setMap(null)
+
+    }
+    for (var i=0; i < markers.length ; i++) {
+      markers[i].setMap(maps[0].instance)
+
+    }
+  },
+  'click .join' : function(event) {
+    Session.set('toggle',false);
+    for (var i=0; i < markers.length ; i++) {
+      Posts.find().forEach(function(post) {
+
+        if (post.court === markers[i].title) {
+          new_markers.push(markers[i])
+        }
+        else {
+          markers[i].setMap(null)
+        }
+      });
+    }
+    for (var i=0; i < new_markers.length; i++) {
+      new_markers[i].setMap(maps[0].instance)
+    }
   },
 
 //Map Sidebar Events//
 
   'click .profile-list' : function(event) {
     Session.set('sidebar',true)
+    Session.set('courtTrue',false)
     Meteor.setTimeout(function (){
         if ($('#sidebar-extension').css('width') === '0px') {
           $('#sidebar-extension').css('width','1200px');
@@ -91,6 +116,7 @@ Template.map.events({
   },
   'click .map-list' : function(event) {
     Session.set('sidebar',false)
+    Session.set('courtTrue',false);
     Meteor.setTimeout(function () {
       if ($('#sidebar-extension').css('width') === '0px') {
         $('#sidebar-extension').css('width','550px');
@@ -98,10 +124,17 @@ Template.map.events({
       }
       else {
         Session.set('sidebar',true)
+        maps[0].instance.setCenter(new google.maps.LatLng(Geolocation.latLng().lat,Geolocation.latLng().lng))
+        maps[0].instance.setZoom(12);
         $('#sidebar-extension').css('width','0px')
         $('#match-listings').css('visibility','hidden');
       }
     },2);
+  },
+  'click .logout' : function(event) {
+    event.preventDefault();
+    Meteor.logout();
+    Router.go('/')
   },
 
 // Match Listings Events //
@@ -109,7 +142,7 @@ Template.map.events({
   'mouseenter .matches': function(event) {
     var id = $(event.target).attr("id");
     Session.set('match-id',id);
-    Session.set('mapOn',true);
+    //Session.set('mapOn',true);
   },
   'click .match-enlarge': function(event) {
     var pos = new google.maps.LatLng(Geolocation.latLng().lat,Geolocation.latLng().lng);
@@ -126,9 +159,9 @@ Template.map.events({
       $('#sidebar-extension-matches').css('visibility','visible');
       var court = Courts.findOne({Name: Posts.findOne(id).court});
       var LatLng = new google.maps.LatLng(court.Lat,court.Lng);
-      markers[0].setPosition(LatLng);
-      markers[0].setTitle(court.Name);
-      markers[0].setMap(maps2[0].instance)
+      markers2[0].setPosition(LatLng);
+      markers2[0].setTitle(court.Name);
+      markers2[0].setMap(maps2[0].instance)
       maps2[0].instance.setCenter(LatLng);
       var request = {
         origin: pos,
@@ -186,47 +219,13 @@ Template.map.helpers( {
     if (GoogleMaps.loaded()) {
       return {
         center: new google.maps.LatLng(Geolocation.latLng().lat,Geolocation.latLng().lng),
-        zoom: 12,
+        zoom: 13,
         styles: styles,
         disableDefaultUI: true};
     }
   },
   'user' : function() {
     return Meteor.user();
-  },
-  posts: function() {
-    var courts = [];
-    var pos = Geolocation.latLng();
-    var R = 6371000;
-    // Use Trig to find the distance from user's position.
-    Posts.find().forEach(function(post) {
-      court = Courts.findOne({'Name' : post.court});
-      var x = (pos.lng-court.Lng) * Math.cos((pos.lat+court.Lat)/2);
-      var y = (pos.lat-court.Lat);
-      var d = Math.sqrt(x*x + y*y) * R;
-      courts.push({
-        'id' : post._id,
-        'Distance' : d
-      });
-    });
-    // Sort the array by smallest value of d.
-    do {
-      var counter = 0;
-      for (var i=0; i < (courts.length -1) ; i++) {
-        if (courts[i]['Distance'] > courts[i+1]['Distance']) {
-          var swap = courts[i];
-          courts[i] = courts[i+1];
-          courts[i+1] = swap;
-          counter += 1;
-        }
-      }
-    } while(counter > 0);
-    var posts = [];
-    for (var i = 0; i < courts.length; i++) {
-      posts[i] = Posts.findOne(courts[i]['id']);
-      posts[i].distance = (courts[i]['Distance']/1000);
-    }
-    return posts;
   },
   courts: function() {
     return Courts.find();
@@ -239,7 +238,7 @@ Template.map.helpers( {
   },
   'matchOn' : function() {
     return Session.get('matchOn');
-  }
+  },
 });
 
 
@@ -262,7 +261,7 @@ Template.registerHelper('exampleMapOptions2',function(){
 
 Template.map_details.onCreated(function() {
     GoogleMaps.ready('exampleMap2',function(map2){
-      markers = [];
+      markers2 = [];
       //directionDisplay;
       maps2 = [map2];
       directionsDisplay = new google.maps.DirectionsRenderer();
@@ -278,7 +277,7 @@ Template.map_details.onCreated(function() {
           icon: image,
           title: court.Name,
         });
-        markers.push(marker);
+        markers2.push(marker);
 
         directionsDisplay.setMap(map2.instance);
 
@@ -286,13 +285,22 @@ Template.map_details.onCreated(function() {
     });
 
 Template.map.onRendered(function() {
-  console.log("Does this run initially?")
+  Session.set('toggle',true)
   GoogleMaps.ready('exampleMap',function(map){
       markers = [];
+      var pos = Geolocation.latLng();
+      var google_pos = new google.maps.LatLng(pos.lat,pos.lng);
+
+      var marker = new google.maps.Marker({
+          position: google_pos,
+          map: map.instance,
+          animation: google.maps.Animation.DROP,
+          icon: '/img/blue_dot.png',
+        });
       maps[0]=map;
       //bootbox.alert("Choose a court to host your match.");
       Courts.find().forEach(function(court) {
-      LatLng = new google.maps.LatLng(court.Lat,court.Lng);
+      var LatLng = new google.maps.LatLng(court.Lat,court.Lng);
       var image = '/img/tennis.png';
       var form_string = '<h5>' + court.Name + '</h5>'+
       '<p> Fill out the details below to host a match. </p>' +
@@ -336,8 +344,32 @@ Template.map.onRendered(function() {
       //Add info window to markers
 
       google.maps.event.addListener(marker,'click', function() {
+        if (Session.get('toggle')) {
           info.setContent(form_string);
           info.open(map.instance,marker);
+        }
+        else {
+            Session.set('sidebar',false)
+            Meteor.setTimeout(function () {
+              if ($('#sidebar-extension').css('width') === '0px') {
+                map.instance.setCenter(LatLng)
+                map.instance.panBy(-40, 0)
+                map.instance.setZoom(15);
+                Session.set('courtName',marker.title)
+                Session.set('courtTrue',true);
+                $('#sidebar-extension').css('width','550px');
+                $('#match-listings').css('visibility','visible')
+              }
+              else {
+                Session.set('sidebar',true)
+                map.instance.setCenter(new google.maps.LatLng(Geolocation.latLng().lat,Geolocation.latLng().lng))
+                map.instance.setZoom(12);
+                Session.set('courtTrue',false);
+                $('#sidebar-extension').css('width','0px')
+                $('#match-listings').css('visibility','hidden');
+              }
+            },2);
+          }
         });
 
       // Add jquery to info windom DOM
