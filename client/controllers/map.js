@@ -63,11 +63,11 @@ styles = [
 Template.map.events({
 
   // Map Menu Events //
-  'click .gps' : function(event) {
-    var pos = Geolocation.latLng();
-    var google_pos = new google.maps.LatLng(pos.lat,pos.lng);
-    maps[0].instance.setCenter(google_pos);
-  },
+  //'click .gps' : function(event) {
+    //var pos = Geolocation.latLng();
+    //var google_pos = new google.maps.LatLng(pos.lat,pos.lng);
+    //maps[0].instance.setCenter(google_pos);
+  //},
   'click .host' : function(event) {
     Session.set('toggle',true);
     for (var i =0; i < new_markers.length ; i++) {
@@ -116,11 +116,11 @@ Template.map.events({
   },
   'click .map-list' : function(event) {
     Session.set('sidebar',false)
-    Session.set('courtTrue',false);
     Meteor.setTimeout(function () {
       if ($('#sidebar-extension').css('width') === '0px') {
         $('#sidebar-extension').css('width','550px');
         $('#match-listings').css('visibility','visible')
+        Session.set('courtTrue',false);
       }
       else {
         Session.set('sidebar',true)
@@ -128,6 +128,7 @@ Template.map.events({
         maps[0].instance.setZoom(12);
         $('#sidebar-extension').css('width','0px')
         $('#match-listings').css('visibility','hidden');
+        Session.set('courtTrue',false);
       }
     },2);
   },
@@ -241,7 +242,11 @@ Template.map.helpers( {
   },
 });
 
-
+Template.navbar.helpers( {
+  'toggle' : function() {
+    return Session.get('toggle');
+  }
+});
 Template.registerHelper('exampleMapOptions2',function(){
     var match_id = Session.get('match-id');
     court = Courts.findOne({Name: Posts.findOne(match_id).court});
@@ -302,32 +307,37 @@ Template.map.onRendered(function() {
       Courts.find().forEach(function(court) {
       var LatLng = new google.maps.LatLng(court.Lat,court.Lng);
       var image = '/img/tennis.png';
-      var form_string = '<h5>' + court.Name + '</h5>'+
-      '<p> Fill out the details below to host a match. </p>' +
+      var form_string = '<h4 id="star">' + court.Name + '&nbsp </h4>'+
+      '<p> There are <strong>' + court.Courts + ' courts.</strong> Fill out the form to host a match.</p>' +
       '<form role="form">'+
-      '<div class="form-group">'+
-      '<label  for="title">Title:</label>'+
+      '<div class="input-group">'+
+      '<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>'+
       '<input type="text" class="form-control" id="title" placeholder="Enter a title">'+
-      '</div>'+
-      '<label  for="type">Match Details:</label>'+
-      '<div class="form-group">'+
-      '<input class="form-control" value="" id="court" type="text" placeholder="" disabled></div>'+
-      '<div class="form-group">'+
-      '<select class="form-control" id="type" placeholder="Choose match type">'+
-      '<option>2.0</option>'+
-      '<option>2.5</option>'+
-      '<option>3.0</option>'+
-      '<option>3.5</option>'+
-      '<option>4.0</option>'+
+      '</div><br/>'+
+      '<div class="input-group datetimepicker">'+
+      '<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>'+
+      '<input class="set-due-date form-control" type="text" id="datetime" placeholder="Enter a date and time"/>'+
+      '</div><br/>'+
+      '<div class="input-group">'+
+      '<span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>'+
+      '<input class="form-control" value="" id="court" type="text" placeholder="" disabled/></div><br/>'+
+      '<div class="input-group">'+
+      '<span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>'+
+      '<select class="form-control" id="type">'+
+      '<option>Exhibition</option>'+
+      '<option>Super Tiebreaker</option>'+
+      '<option>One Set</option>'+
+      '<option>Three Set</option>'+
+      '<option>Five Set</option>'+
       '</select>'+
-      '</div>'+
-      '<div class="input-group clockpicker form-group" data-autoclose="true">'+
-      '<input type="text" class="form-control" id="time" value="Choose time">'+
-      '<span class="input-group-addon">'+
-      '<span class="glyphicon glyphicon-time"></span></span>'+
-      '</div>'+
+      '</div><br/>'+
+      '<div class="input-group">'+
+      '<span class="input-group-addon"><i class="glyphicon glyphicon-info-sign"></i></span>'+
+      '<textarea id="details" class="form-control" rows="5" id="comment" placeholder="Enter additional details"></textarea>'+
+      '</div><br/>'+
       '<div class="form-group">'+
-      '<button type="submit" class="btn btn-primary"> Submit </button>'+
+      '<button type="submit" class="btn btn-primary btn-block"> Submit </button>'+
+      '</div>'+
       '</form>';
 
       var info = new google.maps.InfoWindow(),
@@ -375,16 +385,20 @@ Template.map.onRendered(function() {
       // Add jquery to info windom DOM
 
       google.maps.event.addListener(info,'domready',function() {
-          $('.clockpicker').clockpicker();
+          $('.datetimepicker').datetimepicker();
           $('#court').attr('placeholder',court.Name)
           $('#court').attr('value',court.Name)
+          for (var i=1; i <= court.Rating; i++) {
+            $('#star').append("<span class='glyphicon glyphicon-star'></span>" );
+          }
           $(document).one("submit",function(event) {
             event.preventDefault();
             var postProperties = {
               title: $(event.target).find('[id=title]').val(),
               type: $(event.target).find('[id=type]').val(),
               court: $(event.target).find('[id=court]').val(),
-              time: $(event.target).find('[id=time]').val(),
+              time: $(event.target).find('[id=datetime]').val(),
+              details: $(event.target).find('[id=details]').val(),
               author: Meteor.user().username
             }
             Posts.insert(postProperties);

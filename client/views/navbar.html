@@ -38,18 +38,21 @@
     <div class="container-fluid">
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <button class="btn btn-default dropdown-toggle gps hide-menu join" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+          {{#if toggle}}
+            <button class="btn btn-default dropdown-toggle gps hide-menu join" style="display:inline-block;" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+              Join
+            </button>
+            <button class="btn btn-primary dropdown-toggle gps hide-menu host" type="button" style="display:inline-block;" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+              Host
+            </button>
+          {{else}}
+          <button class="btn btn-primary dropdown-toggle gps hide-menu join" style="display:inline-block;" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
             Join
           </button>
-          <button class="btn btn-default dropdown-toggle gps hide-menu host" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+          <button class="btn btn-default dropdown-toggle gps hide-menu host" type="button" style="display:inline-block;" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
             Host
           </button>
-          <div class="dropdown dropdown-map">
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-              <li role="presentation"><a role="menuitem" class = "logout" tabindex="-1" href="#">Action</a></li>
-            </ul>
-          </div>
+          {{/if}}
         </ul>
       </div>
     </div>
